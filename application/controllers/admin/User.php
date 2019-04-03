@@ -51,7 +51,7 @@ class User extends CI_Controller {
 			$data = array(	'name' => $i->post('name'),
 							'email' => $i->post('email'),
 							'username' => $i->post('username'),
-							'password' => $i->post('password'),
+							'password' => sha1($i->post('password')),
 							'access_level' => $i->post('access_level')
 			);
 
@@ -90,7 +90,7 @@ class User extends CI_Controller {
 							'name' => $i->post('name'),
 							'email' => $i->post('email'),
 							'username' => $i->post('username'),
-							'password' => $i->post('password'),
+							'password' => sha1($i->post('password')),
 							'access_level' => $i->post('access_level')
 			);
 

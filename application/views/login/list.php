@@ -35,15 +35,36 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Masukkan Username dan Password Anda untuk memulai</p>
+
+<?php 
+  // Notifikasi Error
+  echo validation_errors('<div class="alert alert-success">', '</div>');
+  // Notifikasi Gagal Login
+  if ($this->session->flashdata('warning')) {
+      echo '<div class="alert alert-warning">';
+      echo $this->session->flashdata('warning');
+      echo '</div>';
+   } 
+
+   // Notifikasi Logout
+  if ($this->session->flashdata('success')) {
+      echo '<div class="alert alert-success">';
+      echo $this->session->flashdata('success');
+      echo '</div>';
+   } 
+
+// Form Open Login
+   echo form_open(base_url('login'));
+?>
 
     <form action="<?php echo base_url() ?>assets/admin/index2.html" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <input type="text" name="username" class="form-control" placeholder="Username">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -60,7 +81,7 @@
         </div>
         <!-- /.col -->
       </div>
-    </form>
+<?php form_close(); ?>
 
 
     <!-- /.social-auth-links -->

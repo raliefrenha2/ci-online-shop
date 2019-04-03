@@ -5,8 +5,26 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
+
+		// Validasi 
+		$this->form_validation->set_rules('username', 'Username', 'required', ['required' => '%s harus diisi..']);
+		$this->form_validation->set_rules('password', 'Password', 'required', ['required' => '%s harus diisi..']);
+
+		if ($this->form_validation->run()) {
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+			// Proses ke Simple Login
+			$this->simple_login->login($username, $password);
+		} else {
+			# code...
+		}
 		$data = ['title' => 'Login Administrator'];
 		$this->load->view('login/list', $data, FALSE);
+	}
+
+	public function logout()
+	{
+		$this->simple_login->logout();
 	}
 
 }
