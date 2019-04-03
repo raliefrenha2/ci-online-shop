@@ -6,7 +6,7 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$data = [ 'title' => 'Halaman Administrator',
-					'isi' => 'admin/dashboard/list'
+					'content' => 'admin/dashboard/list'
 		];
 
 		$this->load->view('admin/layouts/wrapper', $data, FALSE);

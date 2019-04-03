@@ -1,5 +1,5 @@
 <?php
 
-if ( $isi) {
-	$this->load->view($isi);
+if ( $content) {
+	$this->load->view($content);
 }
