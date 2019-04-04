@@ -223,6 +223,9 @@
 <script src="<?php echo base_url() ?>assets/admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url() ?>assets/admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- ckeditor -->
+<script src="<?php echo base_url() ?>assets/ckeditor/ckeditor.js"></script>
+<script src="<?php echo base_url() ?>assets/ckeditor/samples/js/sample.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url() ?>assets/admin/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
@@ -231,6 +234,7 @@
 <script src="<?php echo base_url() ?>assets/admin/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
+  initSample();
   $(function () {
     $('#example1').DataTable()
     $('#example2').DataTable({
@@ -242,6 +246,8 @@
       'autoWidth'   : false
     })
   })
+
+
 </script>
 </body>
 </html>
