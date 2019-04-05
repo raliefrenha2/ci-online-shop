@@ -41,6 +41,7 @@ if ($this->session->flashdata('success')) {
 			<td><?php echo $product->stock ?></td>
 			<td><?php echo $product->product_status ?></td>
 			<td>
+				<a href="<?php echo base_url('admin/product/image/' .$product->product_id) ?>" class="btn btn-success btn-xs"><i class="fa fa-image"></i>Gambar (<?php echo $product->image_total; ?>)</a>
 				<a href="<?php echo base_url('admin/product/edit/' .$product->product_id) ?>" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i>Edit</a>
 				<?php include 'destroy.php'; ?>
 			</td>

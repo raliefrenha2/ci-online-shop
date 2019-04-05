@@ -234,7 +234,6 @@
 <script src="<?php echo base_url() ?>assets/admin/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-  initSample();
   $(function () {
     $('#example1').DataTable()
     $('#example2').DataTable({
@@ -247,7 +246,7 @@
     })
   })
 
-
+ initSample();
 </script>
 </body>
 </html>

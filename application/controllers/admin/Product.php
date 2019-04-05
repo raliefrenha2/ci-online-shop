@@ -27,6 +27,79 @@ class Product extends CI_Controller
 		$this->load->view('admin/layouts/wrapper', $data, false);
 	}
 
+	public function image($product_id)
+	{
+		$product = $this->product_model->detail($product_id);
+		$images = $this->product_model->image($product_id);
+		$valid = $this->form_validation;
+
+		$valid->set_rules('image_title', 'Judul Gambar', 'required', ['required' => '%s harus diisi.']);
+
+
+		if ($valid->run()) {
+			$config['upload_path'] = './assets/upload/image';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size']  = '2400';
+			$config['max_width']  = '2024';
+			$config['max_height']  = '2024';
+			
+			$this->load->library('upload', $config);
+			
+			if ( ! $this->upload->do_upload('image')){
+			// End Validasi
+
+			$data = [
+				'title' 			=>	'Tambah Gambar Produk',
+				'product' 	=> $product,
+				'images' 	=> $images,
+				'error' 			=> $this->upload->display_errors(),
+				'content' 		=> 'admin/product/image'
+			];
+
+			$this->load->view('admin/layouts/wrapper', $data, false);
+			// Masuk Database
+		} else {
+			$upload_image = ['upload_data' => $this->upload->data()];
+			// Create Thumbnail
+			$config['image_library'] 	= 'gd2';
+			$config['source_image'] 	= './assets/upload/image/'.$upload_image['upload_data']['file_name'];
+			// Lokasi folder thumbnail
+			$config['new_image'] 		= './assets/upload/image/thumbs';
+			$config['create_thumb'] 	= TRUE;
+			$config['maintain_ratio'] 	= TRUE;
+			$config['width']        	= 250;
+			$config['height']       	= 250;
+			$config['thumb_marker'] 	= '';
+
+			$this->load->library('image_lib', $config);
+
+			$this->image_lib->resize();
+			// End create thumbnail
+			$i 	= $this->input;
+
+			$data = array(
+				'product_id' 				=> $product_id,
+				'image_title' 				=> $i->post('image_title'),
+				
+				'image' 				=> $upload_image['upload_data']['file_name'],
+
+			);
+
+			$this->product_model->create_image($data);
+			$this->session->set_flashdata('success', 'Gambar telah ditambah');
+			redirect(base_url('admin/product/image/' .$product_id), 'refresh');
+		}}
+		// End Masuk Database
+		$data = [
+				'title' 			=>	'Tambah Gambar Produk '.$product->product_name,
+				'product' 	=> $product,
+				'images' 	=> $images,
+				'content' 		=> 'admin/product/image'
+			];
+
+		$this->load->view('admin/layouts/wrapper', $data, false);
+	}
+
 	// Tambah Product
 	public function create()
 	{
@@ -50,7 +123,7 @@ class Product extends CI_Controller
 			// End Validasi
 
 			$data = [
-				'title' 			=>	'Tambah Produk Produk',
+				'title' 			=>	'Tambah Produk',
 				'categories' 	=> $categories,
 				'error' 			=> $this->upload->display_errors(),
 				'content' 		=> 'admin/product/create'
@@ -238,7 +311,20 @@ class Product extends CI_Controller
 		$this->session->set_flashdata('success', 'Data telah dihapus');
 		redirect(base_url('admin/product'), 'refresh');
 	}
+
+	public function destroy_image($product_id, $image_id)
+	{
+		$image = $this->product_model->image_detail($image_id);
+		unlink('./assets/upload/image/'.$image->image);
+		unlink('./assets/upload/image/thumbs/'.$image->image);
+		$data = ['image_id' => $image_id];
+		$this->product_model->destroy_image($data);
+		$this->session->set_flashdata('success', 'Gambar telah dihapus');
+		redirect(base_url('admin/product/image/' .$product_id), 'refresh');
+	}
 }
+
+
 
 /* End of file Product.php */
 /* Location: ./application/controllers/admin/Product.php */
