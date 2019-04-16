@@ -43,7 +43,6 @@ class Category_model extends CI_Model {
 
 		return $this->db->get()->row();
 	}
-
 }
 
 /* End of file Category_model.php */

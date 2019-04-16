@@ -1,4 +1,8 @@
+<?php 
+// load konfigurasi website
+$setting = $this->configuration_model->listing();
 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +10,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+<!--  -->
+	<link rel="icon" type="image/png" href="<?php echo base_url('assets/upload/image/' .$setting->icon); ?> "/>
+<!-- SEO Google -->
+<meta name="keywords" content="<?php echo $setting->keywords; ?>">
+<meta name="description" content="<?php echo $title; ?>, <?php echo $setting->description; ?>">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
