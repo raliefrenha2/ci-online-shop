@@ -41,7 +41,7 @@
 								</a>
 
 								<span class="block2-price m-text6 p-r-5">
-									Rp <?php echo number_format($product->price,'0',',','.') ?>
+									IDR <?php echo number_format($product->price,'0',',','.') ?>
 								</span>
 							</div>
 						</div>
