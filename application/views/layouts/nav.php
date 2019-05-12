@@ -1,6 +1,6 @@
 <?php
  // Ambil Data menu dari Konfigurasi
- $product_nav = $this->configuration_model->product_nav(); 
+ $product_nav = $this->configuration_model->product_nav();
 ?>
 			<!-- Menu -->
 			<div class="wrap_menu">
@@ -18,24 +18,6 @@
 									<li><a href="<?php echo base_url('product/category/'.$category->category_slug); ?>"><?php echo $category->category_name; ?></a></li>
 								<?php } ?>
 							</ul>
-						</li>
-
-						
-
-						<li class="sale-noti">
-							<a href="product.html">Sale</a>
-						</li>
-
-						<li>
-							<a href="cart.html">Features</a>
-						</li>
-
-						<li>
-							<a href="blog.html">Blog</a>
-						</li>
-
-						<li>
-							<a href="about.html">About</a>
 						</li>
 
 						<li>
@@ -284,7 +266,13 @@
 				</li>
 
 				<li class="item-menu-mobile">
-					<a href="product.html">Shop</a>
+					<a href="#">Produk &amp Belanja</a>
+					<ul class="sub-menu">
+						<?php foreach ($product_nav as $category) { ?>
+							<li><a href="<?php echo base_url('product/category/'.$category->category_slug); ?>"><?php echo $category->category_name; ?></a></li>
+						<?php } ?>
+					</ul>
+					<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 				</li>
 
 				<li class="item-menu-mobile">

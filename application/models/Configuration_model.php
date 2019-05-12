@@ -28,6 +28,7 @@ class Configuration_model extends CI_Model {
 		$this->db->from('products');
 		$this->db->join('categories', 'categories.category_id = products.category_id', 'left');
 		$this->db->order_by('categories.sort', 'asc');
+		$this->db->group_by('products.category_id');
 		
 		return $this->db->get()->result();
 	}

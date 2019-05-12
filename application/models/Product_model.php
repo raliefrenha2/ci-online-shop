@@ -25,6 +25,25 @@ class Product_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function home()
+	{
+		$this->db->select('products.*,
+								users.name,
+								categories.category_name,
+								categories.category_slug,
+								COUNT(images.product_id) AS image_total');
+		$this->db->from('products');
+		$this->db->join('users', 'users.user_id = products.user_id', 'left');
+		$this->db->join('categories', 'categories.category_id = products.category_id', 'left');
+		$this->db->join('images', 'images.product_id = products.product_id', 'left');
+		$this->db->where('products.product_status', 'Publish');
+		$this->db->order_by('product_id', 'desc');
+		$this->db->group_by('products.product_id');
+		$this->db->limit(12);	
+
+		return $this->db->get()->result();
+	}
+
 	public function create($data)
 	{
 		$this->db->insert('products', $data);

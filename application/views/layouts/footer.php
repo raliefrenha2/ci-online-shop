@@ -1,55 +1,45 @@
+<?php 
+$setting = $this->configuration_model->listing();
+$footer_product_nav = $this->configuration_model->product_nav();
+?>
 <!-- Footer -->
 	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
 		<div class="flex-w p-b-90">
 			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
 				<h4 class="s-text12 p-b-30">
-					GET IN TOUCH
+					KONTAK KAMI
 				</h4>
 
 				<div>
 					<p class="s-text7 w-size27">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+						<?= $setting->address; ?>
+						<br><i class="fa fa-envelope"></i> <?= $setting->email  ?>
+						<br><i class="fa fa-phone"></i> <?= $setting->telephone  ?>
 					</p>
 
 					<div class="flex-m p-t-30">
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+						<a href="<?= $setting->facebook ?>" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+						<a href="<?= $setting->instagram ?>" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+						
 					</div>
 				</div>
 			</div>
 
 			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
 				<h4 class="s-text12 p-b-30">
-					Categories
+					Kategori
 				</h4>
 
 				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Men
+					<?php foreach ($footer_product_nav as $category): ?>
+						<li class="p-b-9">
+						<a href="<?= base_url('product/category/' .$category->category_slug) ?>" class="s-text7">
+							<?php echo $category->category_name ?>
 						</a>
 					</li>
+					<?php endforeach ?>
+					
 
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Women
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Dresses
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Sunglasses
-						</a>
-					</li>
 				</ul>
 			</div>
 
