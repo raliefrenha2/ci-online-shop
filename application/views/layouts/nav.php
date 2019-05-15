@@ -36,76 +36,70 @@
 				<span class="linedivide1"></span>
 
 				<div class="header-wrapicon2">
+					<?php 
+					// cek ada belanja atau tidak
+					$carts = $this->cart->contents();
+
+					 ?>
 					<img src="<?php echo base_url() ?>/assets/template/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-					<span class="header-icons-noti">0</span>
+					<span class="header-icons-noti"><?php echo count($carts); ?></span>
 
 					<!-- Header cart noti -->
 					<div class="header-cart header-dropdown">
 						<ul class="header-cart-wrapitem">
+							<?php 
+								if(empty($carts)) { 
+							?>
+								<li class="header-cart-item">
+									<p class="alert alert-success">Keranja Belanja Kosong</p>
+								</li>
+
+								<?php
+								}else {
+									$total = number_format($this->cart->total(), '0',',','.');
+									foreach ($carts as $item) {
+										$product_item = $this->product_model->detail($item['id']);
+								?>
+							
+							
 							<li class="header-cart-item">
 								<div class="header-cart-item-img">
-									<img src="<?php echo base_url() ?>/assets/template/images/item-cart-01.jpg" alt="IMG">
+									<img src="<?php echo base_url('assets/upload/image/thumbs/'.$product_item->image) ?>" alt="<?php echo $item['name'] ?>">
 								</div>
 
 								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										White Shirt With Pleat Detail Back
+									<a href="<?php echo base_url('product/detail/'.$product_item->product_slug); ?>" class="header-cart-item-name">
+										<?php echo $item['name']; ?>
 									</a>
 
 									<span class="header-cart-item-info">
-										1 x $19.00
+										<?php echo $item['qty']; ?> x <?php echo number_format($item['price'],'0',',','.'); ?>
 									</span>
 								</div>
 							</li>
+						<?php 
+								} // end ForEach
+							}  // end If
 
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="<?php echo base_url() ?>/assets/template/images/item-cart-02.jpg" alt="IMG">
-								</div>
+						?>
 
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										Converse All Star Hi Black Canvas
-									</a>
-
-									<span class="header-cart-item-info">
-										1 x $39.00
-									</span>
-								</div>
-							</li>
-
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="<?php echo base_url() ?>/assets/template/images/item-cart-03.jpg" alt="IMG">
-								</div>
-
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										Nixon Porter Leather Watch In Tan
-									</a>
-
-									<span class="header-cart-item-info">
-										1 x $17.00
-									</span>
-								</div>
-							</li>
 						</ul>
 
 						<div class="header-cart-total">
-							Total: $75.00
+							Total: <?php echo $total ?>
 						</div>
 
 						<div class="header-cart-buttons">
 							<div class="header-cart-wrapbtn">
 								<!-- Button -->
-								<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+								<a href="<?php echo base_url('shop') ?>" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									View Cart
 								</a>
 							</div>
 
 							<div class="header-cart-wrapbtn">
 								<!-- Button -->
-								<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+								<a href="<?php echo base_url('shop/checkout') ?>" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									Check Out
 								</a>
 							</div>
@@ -134,82 +128,70 @@
 				<span class="linedivide2"></span>
 
 				<div class="header-wrapicon2">
+							
 					<img src="<?php echo base_url() ?>/assets/template/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
 					<span class="header-icons-noti">0</span>
 
 					<!-- Header cart noti -->
 					<div class="header-cart header-dropdown">
 						<ul class="header-cart-wrapitem">
-							<li class="header-cart-item">
+							<?php 
+								if(empty($carts)) { 
+							?>
+								<li class="header-cart-item">
+									<p class="alert alert-success">Keranja Belanja Kosong</p>
+								</li>
+
+								<?php
+								}else {
+									$total = number_format($this->cart->total(), '0',',','.');
+									foreach ($carts as $item) {
+										$product_item = $this->product_model->detail($item['id']);
+								?>
+
+								<li class="header-cart-item">
 								<div class="header-cart-item-img">
-									<img src="<?php echo base_url() ?>/assets/template/images/item-cart-01.jpg" alt="IMG">
+									<img src="<?php echo base_url('assets/upload/image/thumbs/'.$product_item->image) ?>" alt="<?php echo $item['name'] ?>">
 								</div>
 
 								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										White Shirt With Pleat Detail Back
+									<a href="<?php echo base_url('product/detail/'.$product_item->product_slug); ?>" class="header-cart-item-name">
+										<?php echo $item['name']; ?>
 									</a>
 
 									<span class="header-cart-item-info">
-										1 x $19.00
+										<?php echo $item['qty']; ?> x <?php echo number_format($item['price'],'0',',','.'); ?>
 									</span>
 								</div>
 							</li>
 
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="<?php echo base_url() ?>/assets/template/images/item-cart-02.jpg" alt="IMG">
-								</div>
+<?php }} ?>
 
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										Converse All Star Hi Black Canvas
-									</a>
-
-									<span class="header-cart-item-info">
-										1 x $39.00
-									</span>
-								</div>
-							</li>
-
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="<?php echo base_url() ?>/assets/template/images/item-cart-03.jpg" alt="IMG">
-								</div>
-
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										Nixon Porter Leather Watch In Tan
-									</a>
-
-									<span class="header-cart-item-info">
-										1 x $17.00
-									</span>
-								</div>
-							</li>
 						</ul>
 
 						<div class="header-cart-total">
-							Total: $75.00
+							Total: <?php echo $total ?>
 						</div>
 
 						<div class="header-cart-buttons">
 							<div class="header-cart-wrapbtn">
 								<!-- Button -->
-								<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+								<a href="<?php echo base_url('shop') ?>" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									View Cart
 								</a>
 							</div>
 
 							<div class="header-cart-wrapbtn">
 								<!-- Button -->
-								<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+								<a href="<?php echo base_url('shop/checkout') ?>" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 									Check Out
 								</a>
 							</div>
 						</div>
 					</div>
+
 				</div>
+
 			</div>
 
 			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
