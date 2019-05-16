@@ -43,6 +43,16 @@ class Category_model extends CI_Model {
 
 		return $this->db->get()->row();
 	}
+
+	public function read($category_slug)
+	{
+		$this->db->select('*');
+		$this->db->from('categories');
+		$this->db->where('category_slug', $category_slug);
+		$this->db->order_by('category_id', 'desc');	
+
+		return $this->db->get()->row();
+	}
 }
 
 /* End of file Category_model.php */

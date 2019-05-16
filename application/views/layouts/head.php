@@ -43,5 +43,37 @@ $setting = $this->configuration_model->listing();
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/css/main.css">
 <!--===============================================================================================-->
+
+<style>
+
+	ul.pagination {
+		padding: 0 10px;
+		background-color: red;
+		border-radius: 10px;
+		-ms-text-align-last: center !important;
+		text-align-last: center !important;
+	}
+	.pagination a, .pagination b {
+		padding: 10px 20px;
+		background-color: pink;
+		text-decoration: none;
+		float: left;
+
+	}
+
+	.pagination a {
+		background-color: red;
+		color: white;
+	}
+
+	.pagination b {
+		background-color: black;
+		color: white;
+	}
+
+	.pagination a:hover {
+		background-color: black;
+	}
+</style>
 </head>
 <body class="animsition">
